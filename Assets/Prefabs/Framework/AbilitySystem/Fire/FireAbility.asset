@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 982afa58c5608bf42a0888682e43b842, type: 3}
+  m_Name: FireAbility
+  m_EditorClassIdentifier: 
+  AbilityIcon: {fileID: 21300000, guid: 6b05dd5849497d34f9a8545e103e3bde, type: 3}
+  stamilaCost: 30
+  cooldownDuration: 8
+  ScanerPrefab: {fileID: 6533629549249177919, guid: 2655e90e9c7f4c44f8bb76e184d8c62d,
+    type: 3}
+  fireRadius: 20
+  fireDuration: 0.5
+  damageDuration: 3
+  fireDamage: 20
+  ScanVFX: {fileID: 4372959118629786232, guid: c49f62ce33a2133468e05140196a6be7, type: 3}
+  DamageVFX: {fileID: 100004, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}

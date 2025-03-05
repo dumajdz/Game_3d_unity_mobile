@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 88bd03dac51a8994685638d905c4edcb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135162
+  packageName: 3D Game Kit Lite
+  packageVersion: 1.8.2
+  assetPath: Assets/3DGamekitLite/Art/Materials/Interactables/CrystalActive.mat
+  uploadId: 462213

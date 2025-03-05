@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 6bf795c07ada0594f8f064dd364759dc
+timeCreated: 1503321242
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135162
+  packageName: 3D Game Kit Lite
+  packageVersion: 1.8.2
+  assetPath: Assets/3DGamekitLite/Art/Materials/Effects/Characters/Spitter/Spitter_Acid_Particle_Mat.mat
+  uploadId: 462213

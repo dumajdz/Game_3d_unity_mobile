@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2267384218c585549accd443b4e006c0, type: 3}
+  m_Name: RifleShopItem
+  m_EditorClassIdentifier: 
+  Title: Rifle
+  Price: 80
+  Item: {fileID: 2045186928707899208, guid: fa6f23c90a7dfbe4ba92d66f426b4d8b, type: 3}
+  ItemIcon: {fileID: 21300000, guid: 86e4818f0a1956a498a650e50f57239a, type: 3}
+  Description: 'A power assault rifle with hight file rate and damage.
+
+    Damage
+    Rate 40/s
+
+    Fire Rate 8/s'

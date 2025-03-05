@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fcdf4603b63a12142ab011bfb295e314
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 135162
+  packageName: 3D Game Kit Lite
+  packageVersion: 1.8.2
+  assetPath: Assets/3DGamekitLite/Art/Animations/AnimationClips/Environment/WaterSimple.anim
+  uploadId: 462213
