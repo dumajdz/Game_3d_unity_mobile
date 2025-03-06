@@ -7,7 +7,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] CanvasGroup GameplayControl;
-    [SerializeField] CanvasGroup GameplayMenu;
+    [SerializeField] CanvasGroup PauseMenu;
     [SerializeField] CanvasGroup Shop;
 
     List<CanvasGroup> AllChildren = new List<CanvasGroup>();
@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     CanvasGroup currentActiveGrp;
     private void Start()
     {
-        List<CanvasGroup> children = new List<CanvasGroup>();
+        List<CanvasGroup> children = new();
         GetComponentsInChildren(true,children);
         foreach (CanvasGroup child in children)
         {
@@ -53,9 +53,10 @@ public class UIManager : MonoBehaviour
     {
         SetCanvasGroupEnabled(GameplayControl, enabled);
     }
-    public void SetGameplayMenuEnabled(bool enabled)
+    public void SwithToPauseMenu()
     {
-        SetCanvasGroupEnabled(GameplayMenu,enabled);
+        SetCurrentActiveGrp(PauseMenu);
+        GameplayStatics.SetGamePaused(true);
     }
 
     internal void SwithToShop()
