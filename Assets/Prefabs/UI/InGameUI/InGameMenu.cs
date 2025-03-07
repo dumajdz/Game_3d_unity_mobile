@@ -10,27 +10,26 @@ public class InGameMenu : MonoBehaviour
     [SerializeField] Button RestartBtn;
     [SerializeField] Button MainMenu;
     [SerializeField] UIManager uiManager;
-
+    [SerializeField] LevelManager levelManager;
     private void Start()
     {
         ResumeBtn.onClick.AddListener(ResumeGame);
-        RestartBtn.onClick.AddListener(RestartGame);
+        RestartBtn.onClick.AddListener(RestartLevel);
         MainMenu.onClick.AddListener(BackToMainMenu);
     }
 
     private void BackToMainMenu()
     {
-        Debug.Log("Back to Main Menu");
+        levelManager.GoToMainMenu();
     }
 
-    private void RestartGame()
+    private void RestartLevel()
     {
-        Debug.Log("Restart level");
+        levelManager.RestartCurrentLevel();
     }
 
     private void ResumeGame()
     {
         uiManager.SwithToGameplayUI();
-        Debug.Log("Resume Game");
     }
 }

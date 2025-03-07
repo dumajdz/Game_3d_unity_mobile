@@ -87,6 +87,7 @@ public class Player : MonoBehaviour, ITeamInterface
     {
         inventoryComponent.GetActiveWeapon().Attack();
     }
+
     void StartSwichWeapon()
     {       
             animator.SetTrigger("switchWeapon");
@@ -96,6 +97,7 @@ public class Player : MonoBehaviour, ITeamInterface
     {
         inventoryComponent.NextWeapon();
     }
+
     void aimStickUpdated(Vector2 inputValue)
     {
         aimInput = inputValue;
@@ -114,6 +116,7 @@ public class Player : MonoBehaviour, ITeamInterface
         //Debug.Log($"Joystick Move: {inputValue}");
         moveInput = inputValue;
     }
+
     Vector3 StickInputToWorldDir(Vector2 inputVal)
     {
         Vector3 rightDir = mainCam.transform.right;
@@ -121,6 +124,7 @@ public class Player : MonoBehaviour, ITeamInterface
         return rightDir * inputVal.x + upDir * inputVal.y;
 
     }
+
     // Update is called once per frame
     void Update()// được gọi mỗi frame khi GameObject đang hoạt động trong scene
     {
@@ -128,6 +132,7 @@ public class Player : MonoBehaviour, ITeamInterface
         UpdateCamera();
 
     }
+
     private void PerformMoveAndAim()
     {
         Vector3 MoveDir = StickInputToWorldDir(moveInput);
@@ -174,4 +179,8 @@ public class Player : MonoBehaviour, ITeamInterface
         animator.SetFloat("turnSpeed", animatorTurnSpeed);
     }
 
+    public void DeathFinished()
+    {
+        uiManager.SwithToDeathMenu();
+    }
 }

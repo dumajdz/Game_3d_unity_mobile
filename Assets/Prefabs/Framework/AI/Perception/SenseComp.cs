@@ -1,33 +1,35 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml;
 using UnityEngine;
 
 public abstract class SenseComp : MonoBehaviour//lớp chính
 {
     [SerializeField] float forgettingTime = 3f;
-    static List<PerceptionStimuli> registeredStimulis = new List<PerceptionStimuli>();//static(tĩnh) lớp phụ mới gọi được hàm trong lớp chính
+    static List<PerceptionStimuli> registeredStimulis = new List<PerceptionStimuli>();
     List<PerceptionStimuli> PerceivableStimulis = new List<PerceptionStimuli>();
 
     Dictionary<PerceptionStimuli, Coroutine> ForgettingRoutines = new Dictionary<PerceptionStimuli, Coroutine>();
 
-    public delegate void OnPerceptionUpdated(PerceptionStimuli stimuli, bool successfulySence);
+    public delegate void OnPerceptionUpdated(PerceptionStimuli stimuli, bool succsessfulySensed);
 
-    public event OnPerceptionUpdated onPerceptionUpdated;   
+    public event OnPerceptionUpdated onPerceptionUpdated;
 
     static public void RegisterStimuli(PerceptionStimuli stimuli)
     {
         if (registeredStimulis.Contains(stimuli))
             return;
-        registeredStimulis.Add(stimuli);
 
+        registeredStimulis.Add(stimuli);
     }
-    public void UnRegisterStimuli(PerceptionStimuli stimuli)
+
+    static public void UnRegisterStimuli(PerceptionStimuli stimuli)
     {
         registeredStimulis.Remove(stimuli);
     }
-    protected  abstract bool IsStimuliSensable(PerceptionStimuli stimuli);
+
+    protected abstract bool IsStimuliSensable(PerceptionStimuli stimuli);
+
     // Update is called once per frame
     void Update()
     {
@@ -59,32 +61,34 @@ public abstract class SenseComp : MonoBehaviour//lớp chính
             }
         }
     }
-    IEnumerator ForgetStimuli(PerceptionStimuli stimuli)
-    {
-        yield return new WaitForSeconds(forgettingTime);
-        ForgettingRoutines.Remove(stimuli);
-        onPerceptionUpdated?.Invoke(stimuli,false);
-        Debug.Log($"I lost track of {stimuli.gameObject}");
-    }
-    protected virtual void DrawDebug()
-    {
-
-    }
-    private void OnDrawGizmos()
-    {
-        DrawDebug();
-    }
 
     internal void AssignPerceivedStimuli(PerceptionStimuli targetStimuli)
     {
         PerceivableStimulis.Add(targetStimuli);
-        onPerceptionUpdated!.Invoke(targetStimuli,true);
+        onPerceptionUpdated?.Invoke(targetStimuli, true);
 
-        //TODO: WHAT IF WE ARE FORGETTING IT
-        if(ForgettingRoutines.TryGetValue(targetStimuli, out Coroutine forgetCoroutine))
+        //TODO: WHAT IF WE ARE FORETTING IT.
+        if (ForgettingRoutines.TryGetValue(targetStimuli, out Coroutine forgetCoroutine))
         {
+            StopCoroutine(forgetCoroutine);
             ForgettingRoutines.Remove(targetStimuli);
         }
-        
+    }
+
+    IEnumerator ForgetStimuli(PerceptionStimuli stimuli)
+    {
+        yield return new WaitForSeconds(forgettingTime);
+        ForgettingRoutines.Remove(stimuli);
+        onPerceptionUpdated?.Invoke(stimuli, false);
+    }
+
+    protected virtual void DrawDebug()
+    {
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        DrawDebug();
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,20 +9,25 @@ public class SightSense : SenseComp
     [SerializeField] float eyeHeight = 1f;
     protected override bool IsStimuliSensable(PerceptionStimuli stimuli)
     {
-        float ditance = Vector3.Distance(stimuli.transform.position, transform.position);
-        if(ditance > sightDistance)
+        if (stimuli == null || stimuli.gameObject == null)  // ✅ Tránh lỗi truy cập object đã bị destroy
             return false;
+
+        float distance = Vector3.Distance(stimuli.transform.position, transform.position);
+        if (distance > sightDistance)
+            return false;
+
         Vector3 forwardDir = transform.forward;
         Vector3 stimuliDir = (stimuli.transform.position - transform.position).normalized;
-        if(Vector3.Angle(forwardDir, stimuliDir)>sightHalfAngle)
+
+        if (Vector3.Angle(forwardDir, stimuliDir) > sightHalfAngle)
             return false;
-        if(Physics.Raycast(transform.position + Vector3.up*eyeHeight ,stimuliDir,out RaycastHit hitInfo, sightDistance))
+
+        if (Physics.Raycast(transform.position + Vector3.up * eyeHeight, stimuliDir, out RaycastHit hitInfo, sightDistance))
         {
             if (hitInfo.collider.gameObject != stimuli.gameObject)
-            {
                 return false;
-            }
         }
+
         return true;
     }
     protected override void DrawDebug()
@@ -37,4 +42,5 @@ public class SightSense : SenseComp
         Gizmos.DrawLine(drawCenter, drawCenter + leftLimitDir * sightDistance);
         Gizmos.DrawLine(drawCenter,drawCenter + rightLimitDir * sightDistance);
     }
+
 }
