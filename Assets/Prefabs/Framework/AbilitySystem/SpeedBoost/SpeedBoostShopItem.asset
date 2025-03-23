@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpeedBoostShopItem
   m_EditorClassIdentifier: 
   Title: Speed Boost
-  Price: 40
+  Price: 30
   Item: {fileID: 11400000, guid: a1ef9d4ac730ad94cb373fe5aae1c31e, type: 2}
   ItemIcon: {fileID: 21300000, guid: ce7f12f94bf85bd4f866afe4ce2749ca, type: 3}
   Description: 'Boot speed bu 20m/s in 2 seconds

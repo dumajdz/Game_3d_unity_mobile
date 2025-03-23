@@ -15,5 +15,7 @@ MonoBehaviour:
   AbilityIcon: {fileID: 21300000, guid: 19fbe5f19cd0dba4aba7d0f1e2e018bf, type: 3}
   stamilaCost: 10
   cooldownDuration: 3
+  abilityAudio: {fileID: 8300000, guid: 16592a474aee2455abf0b4722bc2d328, type: 3}
+  volume: 1
   healthRegenAmt: 20
   healthRegenDuration: 2

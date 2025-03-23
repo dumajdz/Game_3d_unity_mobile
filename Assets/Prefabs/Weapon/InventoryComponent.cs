@@ -53,9 +53,13 @@ public class InventoryComponent : MonoBehaviour, IPurchaseListener
         EquipWeapon(nextWeaponIndex);
     }
     internal Weapon GetActiveWeapon()
+    {
+        if (HasWeapon())
         {
-            return weapons[currentWeaponIndex];
+            return weapons[currentWeaponIndex];    
         }
+        return null;
+    }
     private void EquipWeapon(int weaponIndex)
     {
         if (weaponIndex < 0 || weaponIndex >= weapons.Count)
@@ -90,5 +94,9 @@ public class InventoryComponent : MonoBehaviour, IPurchaseListener
             EquipWeapon(0);
         }
         return true;
+    }
+    public bool HasWeapon()
+    {
+        return weapons.Count != 0;
     }
 }

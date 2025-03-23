@@ -8,7 +8,6 @@ public class AimComponent: MonoBehaviour
     [SerializeField] Transform muzzle;
     [SerializeField] float aimRange = 1000;
     [SerializeField] LayerMask aimMask;
-
     public GameObject GetAimTarget(out Vector3 aimDir)
     {
         Vector3 aimStart = muzzle.position;
@@ -19,8 +18,8 @@ public class AimComponent: MonoBehaviour
         }
 
         return null;
-
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(muzzle.position, muzzle.position + GetAimDir() * aimRange);

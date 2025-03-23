@@ -14,6 +14,7 @@ public class HealthUIComponent : MonoBehaviour
         HealthBar newHealthBar = Instantiate(healthBarToSpawn, inGameUI.transform);
         newHealthBar.Init(healthBarAttachPoint);
         healthComponent.onHealthChange += newHealthBar.SetHealthSliderValue;
-        healthComponent.onHealthEmpty += newHealthBar.OnWnerDead;
+        healthComponent.onHealthEmpty += newHealthBar.OnOwnerDead;
     }
+
 }

@@ -20,13 +20,16 @@ public class HealthBar : MonoBehaviour
         healthSlider.value = health / maxHealth;
     }
 
-    public void Update()
+    private void Update()
     {
-        Vector3 attachScreenPoint = Camera.main.WorldToScreenPoint(_attachPoint.position);
-        transform.position = attachScreenPoint;
+        if (transform != null)
+        {
+            Vector3 attachScreenPoint = Camera.main.WorldToScreenPoint(_attachPoint.position);
+            transform.position = attachScreenPoint;
+        }
     }
 
-    internal void OnWnerDead(GameObject Killer)
+    internal void OnOwnerDead(GameObject Killer)
     {
         Destroy(gameObject);
     }

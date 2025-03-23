@@ -4,51 +4,59 @@ using UnityEngine;
 
 public class Compositor : BTNode
 {
-   LinkedList<BTNode> children = new LinkedList<BTNode>();
-   LinkedListNode<BTNode> currentChild = null;
-    public void AddChild(BTNode newcChild)
+    LinkedList<BTNode> children = new LinkedList<BTNode>();
+    LinkedListNode<BTNode> currentChild = null;
+
+    public void AddChild(BTNode newChild)
     {
-        children.AddLast(newcChild);
+        children.AddLast(newChild);
     }
+
     protected override NodeResult Execute()
     {
-        if(children.Count == 0)
+        if (children.Count == 0)
         {
             return NodeResult.Success;
         }
+
         currentChild = children.First;
         return NodeResult.Inprogress;
     }
+
     protected BTNode GetCurrentChild()
     {
         return currentChild.Value;
     }
+
     protected bool Next()
     {
-        if (currentChild != children.Last) 
-        { 
+        if (currentChild != children.Last)
+        {
             currentChild = currentChild.Next;
             return true;
         }
         return false;
     }
+
     protected override void End()
     {
-        if (currentChild == null) 
+        if (currentChild == null)
             return;
 
         currentChild.Value.Abort();
         currentChild = null;
     }
+
     public override void SortPriority(ref int priorityConter)
     {
         base.SortPriority(ref priorityConter);
+
         foreach (var child in children)
         {
             child.SortPriority(ref priorityConter);
         }
-
     }
+
     public override void Initialize()
     {
         base.Initialize();
@@ -57,6 +65,7 @@ public class Compositor : BTNode
             child.Initialize();
         }
     }
+
     public override BTNode Get()
     {
         if (currentChild == null)
@@ -70,6 +79,7 @@ public class Compositor : BTNode
                 return this;
             }
         }
+
         return currentChild.Value.Get();
     }
 }

@@ -64,6 +64,7 @@ public class Player : MonoBehaviour, ITeamInterface
 
         abilityComponent.onStaminaChange += StaminaChanged;
         abilityComponent.BroadcastStaminaChangeImmedietely();
+        GameplayStatics.GameStarted();
     }
 
     private void StaminaChanged(float newAmount, float maxAmount)
@@ -85,12 +86,18 @@ public class Player : MonoBehaviour, ITeamInterface
 
     public void AttackPoint()
     {
-        inventoryComponent.GetActiveWeapon().Attack();
+        if (inventoryComponent.GetActiveWeapon()) 
+        {
+            inventoryComponent.GetActiveWeapon().Attack();
+        }       
     }
 
     void StartSwichWeapon()
     {       
+        if (inventoryComponent.GetActiveWeapon())
+        {
             animator.SetTrigger("switchWeapon");
+        }
     }
 
     public void SwitchWeapon()
@@ -101,13 +108,16 @@ public class Player : MonoBehaviour, ITeamInterface
     void aimStickUpdated(Vector2 inputValue)
     {
         aimInput = inputValue;
-        if (aimInput.magnitude > 0)
+        if (inventoryComponent.HasWeapon())
         {
-            animator.SetBool("attacking", true);
-        }
-        else
-        {
-            animator.SetBool("attacking",false);
+            if (aimInput.magnitude > 0)
+            {
+                animator.SetBool("attacking", true);
+            }
+            else
+            {
+                animator.SetBool("attacking",false);
+            }
         }
     }
 

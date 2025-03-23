@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour, IRewardListener
 {
-    public delegate void OnHealthChange(float health, float delta , float maxHealth);
-    public delegate void OnTakeDamege(float health, float delta, float maxHealth,GameObject Instigator);
+    public delegate void OnHealthChange(float health, float delta, float maxHealth);
+    public delegate void OnTakeDamage(float health, float delta, float maxHealth, GameObject Instigator);
     public delegate void OnHealthEmpty(GameObject Killer);
 
-    [SerializeField] private float health = 100;
-    public float CurrentHealth => health;
+    [SerializeField] float health = 100;
     [SerializeField] float maxhealth = 100;
 
     public event OnHealthChange onHealthChange;
-    public event OnTakeDamege onTakeDamage;
+    public event OnTakeDamage onTakeDamage;
     public event OnHealthEmpty onHealthEmpty;
 
+    [Header("Audio")]
+    [SerializeField] AudioClip HitAudio;
+    [SerializeField] AudioClip DeathAudio;
+    [SerializeField] float volume;
+    AudioSource audioSrc;
+
+    private void Awake()
+    {
+        audioSrc = GetComponent<AudioSource>();
+    }
     public void BroadcastHealthValueImmeidately()
     {
         onHealthChange?.Invoke(health, 0, maxhealth);
@@ -23,20 +32,21 @@ public class HealthComponent : MonoBehaviour, IRewardListener
 
     public void changeHealth(float amt, GameObject Instigator)
     {
-        Debug.Log($"🩸 {gameObject.name} nhận sát thương: {amt}, máu trước: {health}");
-
         if (amt == 0 || health == 0)
         {
-            Debug.Log(" Không thay đổi vì amt = 0 hoặc đã chết.");
             return;
         }
 
         health += amt;
-        Debug.Log($"🩸 Sau khi nhận damage: {health}");
 
         if (amt < 0)
         {
             onTakeDamage?.Invoke(health, amt, maxhealth, Instigator);
+            Vector3 loc = transform.position;
+            if (!audioSrc.isPlaying)
+            {
+                audioSrc.PlayOneShot(HitAudio, volume);
+            }
         }
 
         onHealthChange?.Invoke(health, amt, maxhealth);
@@ -44,9 +54,12 @@ public class HealthComponent : MonoBehaviour, IRewardListener
         if (health <= 0)
         {
             health = 0;
-            Debug.Log("💀 Chết!");
             onHealthEmpty?.Invoke(Instigator);
+            Vector3 loc = transform.position;
+            GameplayStatics.PlayAudioAtLoc(DeathAudio, loc, 1);
         }
+
+        //Debug.Log($"{gameObject.name}, taking damage: {amt}, health is now: {health}");
     }
 
     public void Reward(Reward reward)

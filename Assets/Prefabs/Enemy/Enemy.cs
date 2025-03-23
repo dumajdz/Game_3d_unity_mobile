@@ -3,17 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, IBehaviorTreeInterface, ITeamInterface,ISpawnInterface
-{   
+public abstract class Enemy : MonoBehaviour, IBehaviorTreeInterface, ITeamInterface, ISpawnInterface
+{
     [SerializeField] HealthComponent healthComponent;
     [SerializeField] Animator animator;
     [SerializeField] PerceptionComponent perceptionComp;
     [SerializeField] BehaviorTree behaviorTree;
     [SerializeField] MovementComponent movementComponent;
     [SerializeField] int TeamID = 2;
-    
+
     Vector3 prevPos;
     [SerializeField] Reward killReward;
+
     public int GetTeamID()
     {
         return TeamID;
@@ -28,15 +29,15 @@ public abstract class Enemy : MonoBehaviour, IBehaviorTreeInterface, ITeamInterf
     {
         perceptionComp.onPerceptionTargetChanged += TargetChanged;
     }
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
         if (healthComponent != null)
         {
             healthComponent.onHealthEmpty += StartDeath;
-            healthComponent.onTakeDamage += TakenDamage ;
+            healthComponent.onTakeDamage += TakenDamage;
         }
-
         prevPos = transform.position;
     }
 
@@ -60,14 +61,14 @@ public abstract class Enemy : MonoBehaviour, IBehaviorTreeInterface, ITeamInterf
 
     private void StartDeath(GameObject Killer)
     {
-
         TriggerDeathAnimation();
+        behaviorTree.StopLogic();
+        GetComponent<CapsuleCollider>().enabled = false;
         IRewardListener[] RewardListeners = Killer.GetComponents<IRewardListener>();
         foreach (IRewardListener listener in RewardListeners)
         {
             listener.Reward(killReward);
         }
-
     }
 
     private void TriggerDeathAnimation()
@@ -77,15 +78,22 @@ public abstract class Enemy : MonoBehaviour, IBehaviorTreeInterface, ITeamInterf
             animator.SetTrigger("Dead");
         }
     }
+
     public void OnDeathAnimationFinished()
     {
         Dead();
         Destroy(gameObject);
     }
+
     // Update is called once per frame
     void Update()
     {
         CalculateSpeed();
+        if (transform.position.y < -100)
+        {
+            StartDeath(gameObject);
+            Debug.Log("Enemy Dropped to oblivion");
+        }
     }
 
     private void CalculateSpeed()
@@ -102,14 +110,14 @@ public abstract class Enemy : MonoBehaviour, IBehaviorTreeInterface, ITeamInterf
     {
         if (behaviorTree && behaviorTree.Blackboard.GetBlackboardData("Target", out GameObject target))
         {
-            Vector3 drawTagetPos = target.transform.position + Vector3.up;
-            Gizmos.DrawSphere(drawTagetPos, 0.7f);
+            Vector3 drawTragetPos = target.transform.position + Vector3.up;
+            Gizmos.DrawWireSphere(drawTragetPos, 0.7f);
 
-            Gizmos.DrawLine(transform.position + Vector3.up, drawTagetPos);
+            Gizmos.DrawLine(transform.position + Vector3.up, drawTragetPos);
         }
     }
 
-    public void RotateTowards(GameObject target,bool vertialAim = false)
+    public void RotateTowards(GameObject target, bool vertialAim = false)
     {
         Vector3 AimDir = target.transform.position - transform.position;
         AimDir.y = vertialAim ? AimDir.y : 0;
@@ -123,10 +131,10 @@ public abstract class Enemy : MonoBehaviour, IBehaviorTreeInterface, ITeamInterf
         //override in child
     }
 
-    public void SpawnedBy(GameObject spawnGameobject)
+    public void SpawnedBy(GameObject spawnerGameobject)
     {
-        BehaviorTree spawnBehaviorTree = spawnGameobject.GetComponent<BehaviorTree>();
-        if (spawnBehaviorTree != null && spawnBehaviorTree.Blackboard.GetBlackboardData<GameObject>("Target",out GameObject spawnerTarget))
+        BehaviorTree spawnerBehaviorTree = spawnerGameobject.GetComponent<BehaviorTree>();
+        if (spawnerBehaviorTree != null && spawnerBehaviorTree.Blackboard.GetBlackboardData<GameObject>("Target", out GameObject spawnerTarget))
         {
             PerceptionStimuli targetStimuli = spawnerTarget.GetComponent<PerceptionStimuli>();
             if (perceptionComp && targetStimuli)
@@ -135,8 +143,6 @@ public abstract class Enemy : MonoBehaviour, IBehaviorTreeInterface, ITeamInterf
             }
         }
     }
-    protected virtual void Dead()
-    {
 
-    }
+    protected virtual void Dead() { }
 }

@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 38873387}
   - component: {fileID: 38873388}
   - component: {fileID: 38873395}
+  - component: {fileID: 1915331999570015213}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -117,8 +118,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85279ef55ad8ef046875079bb53251da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxhealth: 100
+  health: 20
+  maxhealth: 20
+  HitAudio: {fileID: 0}
+  DeathAudio: {fileID: 0}
+  volume: 0
 --- !u!95 &8929130252557770644
 Animator:
   serializedVersion: 4
@@ -129,7 +133,7 @@ Animator:
   m_GameObject: {fileID: 5232905757408841682}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
-  m_Controller: {fileID: 9100000, guid: 044cc15373da88948b444c0aaf8d1d10, type: 2}
+  m_Controller: {fileID: 9100000, guid: fbcc7ab860842934797c6a12df54853f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -201,6 +205,8 @@ MonoBehaviour:
   - {fileID: 38873379}
   - {fileID: 38873371}
   - {fileID: 38873381}
+  DetectionAudio: {fileID: 8300000, guid: b63b23c284dc045fcbccd1131f3242bc, type: 3}
+  volume: 1
 --- !u!114 &38873381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,3 +273,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 8
+--- !u!114 &1915331999570015213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5232905757408841682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd91c204f7be8614b9fcc400305e6f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

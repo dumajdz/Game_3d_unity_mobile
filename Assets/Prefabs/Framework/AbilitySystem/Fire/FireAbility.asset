@@ -15,6 +15,8 @@ MonoBehaviour:
   AbilityIcon: {fileID: 21300000, guid: 6b05dd5849497d34f9a8545e103e3bde, type: 3}
   stamilaCost: 30
   cooldownDuration: 8
+  abilityAudio: {fileID: 8300000, guid: 612786f3bcf615346bb881aa07ca76d4, type: 3}
+  volume: 1
   ScanerPrefab: {fileID: 6533629549249177919, guid: 2655e90e9c7f4c44f8bb76e184d8c62d,
     type: 3}
   fireRadius: 20

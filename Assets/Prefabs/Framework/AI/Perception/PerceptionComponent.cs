@@ -6,6 +6,10 @@ using UnityEngine;
 public class PerceptionComponent : MonoBehaviour
 {
     [SerializeField] SenseComp[] senses; //mảng chứa các thành phần giác quan (SenesComp) để phát hiện đối tượng
+    [Header("Audio")]
+    [SerializeField] AudioClip DetectionAudio;
+    [SerializeField] float volume = 1f;
+
     LinkedList<PerceptionStimuli> currentlyPerceivedStimulis = new LinkedList<PerceptionStimuli>();
     //Danh sách các mục tiêu hiện đang bị phát hiện
 
@@ -54,6 +58,8 @@ public class PerceptionComponent : MonoBehaviour
             {
                 targetStimuli = highestStimuli;
                 onPerceptionTargetChanged?.Invoke(targetStimuli.gameObject, true);
+                Vector3 audioPos = transform.position;
+                GameplayStatics.PlayAudioAtLoc(DetectionAudio,audioPos, volume);
             }
         }
         else

@@ -256,7 +256,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2108981410528039483}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: c702c533f30720c438d01fba72d74390, type: 2}
+        m_TargetAssemblyTypeName: UIAudioPlayer, Assembly-CSharp
+        m_MethodName: PlayClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2482313601256946266
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,6 +768,8 @@ MonoBehaviour:
   ResumeBtn: {fileID: 8931279543240687755}
   RestartBtn: {fileID: 7304674513515571465}
   MainMenu: {fileID: 9167565889840045115}
+  uiManager: {fileID: 0}
+  levelManager: {fileID: 0}
 --- !u!1 &7737486774815082067
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,7 +891,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4743955423695151543}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: c702c533f30720c438d01fba72d74390, type: 2}
+        m_TargetAssemblyTypeName: UIAudioPlayer, Assembly-CSharp
+        m_MethodName: PlayClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7978958911291400805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,4 +1100,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6684473980242141130}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: c702c533f30720c438d01fba72d74390, type: 2}
+        m_TargetAssemblyTypeName: UIAudioPlayer, Assembly-CSharp
+        m_MethodName: PlayClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

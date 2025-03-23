@@ -12,6 +12,8 @@ public abstract class BehaviorTree : MonoBehaviour
     {
         get { return blackboard; }
     }
+
+    private bool bRunBehaviorTree = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,16 +21,18 @@ public abstract class BehaviorTree : MonoBehaviour
         ConstructTree(out Root);
         SortTree();
     }
+
     internal IBehaviorTreeInterface GetBehaviorTreeInterface()
     {
         return behaviorTreeInterface;
     }
+
     private void SortTree()
     {
         int priortyCounter = 0;
         Root.Initialize();
         Root.SortPriority(ref priortyCounter);
-        
+
     }
 
     protected abstract void ConstructTree(out BTNode rootNode);
@@ -36,8 +40,12 @@ public abstract class BehaviorTree : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Root.UpdateNode();
+        if (bRunBehaviorTree)
+        {
+            Root.UpdateNode();
+        }
     }
+
     public void AbortLowerThan(int priority)
     {
         BTNode currentNode = Root.Get();
@@ -47,5 +55,8 @@ public abstract class BehaviorTree : MonoBehaviour
         }
     }
 
-
+    internal void StopLogic()
+    {
+        bRunBehaviorTree = false;
+    }
 }

@@ -79,6 +79,9 @@ GameObject:
   - component: {fileID: 1871069124}
   - component: {fileID: 1871069129}
   - component: {fileID: 1871069137}
+  - component: {fileID: 3426754079474328170}
+  - component: {fileID: 3426754079474328165}
+  - component: {fileID: 3426754079474328169}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -118,12 +121,16 @@ MonoBehaviour:
   aimStick: {fileID: 0}
   characterController: {fileID: 2098317004731898878}
   moveSpeed: 5
+  maxMoveSpeed: 80
+  minMoveSpeed: 5
   animTurnSpeed: 15
   movementComponent: {fileID: 1871069124}
   TeamID: 1
   inventoryComponent: {fileID: 3116034591048015110}
   healthComponent: {fileID: 1871069129}
   healthBar: {fileID: 0}
+  abilityComponent: {fileID: 3426754079474328165}
+  staminaBar: {fileID: 0}
   uiManager: {fileID: 0}
 --- !u!143 &2098317004731898878
 CharacterController:
@@ -175,9 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8789743303911ef4c9604bf291d821dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initWeaponPrefabs:
-  - {fileID: 3123148861287136566, guid: 18847e1cd6815a6469d7ba283af1e764, type: 3}
-  - {fileID: 7909434830144946438, guid: fa6f23c90a7dfbe4ba92d66f426b4d8b, type: 3}
+  initWeaponPrefabs: []
   defaultWeaponSlot: {fileID: 7706796906098761866}
   weaponSlots:
   - {fileID: 4383680076548804772}
@@ -221,6 +226,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxhealth: 100
+  HitAudio: {fileID: 8300000, guid: 0fcf9924f0a4b4d4fa08969181f04328, type: 3}
+  DeathAudio: {fileID: 8300000, guid: ea996d57b5a024ea8bc20461e2bd84b1, type: 3}
+  volume: 1
 --- !u!114 &1871069137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,6 +247,133 @@ MonoBehaviour:
   EmmisionColorPropertyName: _Addition
   healthComponent: {fileID: 1871069129}
   shaker: {fileID: 0}
+--- !u!82 &3426754079474328170
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563699464057040352}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &3426754079474328165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563699464057040352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53ab73a1b1222b24eb49c056667a91d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitialAbilities: []
+  stamina: 200
+  maxStamina: 200
+--- !u!114 &3426754079474328169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563699464057040352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce11c7711ea160540b082604694cf16d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  credits: 30
+  PurchaseListeners:
+  - {fileID: 3116034591048015110}
+  - {fileID: 3426754079474328165}
 --- !u!1001 &7706796906099162214
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,6 +10,10 @@ public abstract class Ability : ScriptableObject
     [SerializeField] float cooldownDuration = 2f;
     AbilityComponent abilityComponent;
 
+    [Header("Audio")]
+    [SerializeField] AudioClip abilityAudio;
+    [SerializeField] float volume = 1f;
+
     public AbilityComponent AbilityComp
     {
         get { return abilityComponent; }
@@ -33,8 +37,8 @@ public abstract class Ability : ScriptableObject
     {
         if(abilityOnCooldown) return false;// Nếu đang hồi chiêu, không dùng được
 
-        if (abilityComponent == null || !abilityComponent.TryConsumeStamina(stamilaCost)) 
-            return false; // Nếu không đủ stamina, không thể kích hoạt
+        if (abilityComponent == null || !abilityComponent.TryConsumeStamina(stamilaCost))
+            GameplayStatics.PlayAudioAtPlayer(abilityAudio,volume);
 
         return true;// Nếu đủ điều kiện, có thể kích hoạt kỹ năng
     }
